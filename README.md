@@ -2,7 +2,7 @@
 
 A Streamlit web application that predicts the likelihood of **diabetes**, **heart disease**, and **Parkinson's disease** using trained machine learning models, based on user-entered medical data.
 
-![Home Dashboard](outputs/Home Dashboard.png)
+(![Home Dashboard](outputs/Home-Dashboard.png))
 
 **🔗 Live Demo:** _[add your Streamlit Cloud link here once deployed]_
 
