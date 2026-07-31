@@ -38,7 +38,7 @@ This project provides a single, unified interface for predicting three different
 
 | Negative Diagnosis | Positive Diagnosis |
 |---|---|
-| ![Diabetes Negative](outputs/Diabetes_Prediction_-_Negative_Diagnosis.png) | ![Diabetes Positive](outputs/Diabetes_Prediction___Positive_Diagnosis.png) |
+| ![Diabetes Negative](outputs/Diabetes-Prediction_-_Negative-Diagnosis.png) | ![Diabetes Positive](outputs/Diabetes_Prediction___Positive_Diagnosis.png) |
 
 ### Heart Disease Prediction
 
