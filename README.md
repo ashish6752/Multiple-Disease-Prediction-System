@@ -50,13 +50,13 @@ This project provides a single, unified interface for predicting three different
 
 | Negative Diagnosis | Positive Diagnosis |
 |---|---|
-| ![Parkinsons Negative](outputs/Parkinson_s-Disease-Prediction-Negative_Diagnosis.png) | ![Parkinsons Positive](outputs/Parkinson_s-Disease-Prediction-Positive_Diagnosis.png) |
+| ![Parkinsons Negative](outputs/Parkinsons-Disease-Prediction-Negative_Diagnosis.png) | ![Parkinsons Positive](outputs/Parkinsons-Disease-Prediction-Positive_Diagnosis.png) |
 
 ### Personalized Medical Recommendations
 
 | Diabetes | Heart Disease | Parkinson's |
 |---|---|---|
-| ![Diabetes Recommendations](outputs/Personalized-Medical-Recommendations-Diabetes_.png) | ![Heart Recommendations](outputs/Personalized-Medical-Recommendations-Heart-Disease_.png) | ![Parkinsons Recommendations](outputs/Personalized-Medical-Recommendations-Parkinson_s-Disease_.png) |
+| ![Diabetes Recommendations](outputs/Personalized-Medical-Recommendations-Diabetes.png) | ![Heart Recommendations](outputs/Personalized-Medical-Recommendations-Heart-Disease.png) | ![Parkinsons Recommendations](outputs/Personalized-Medical-Recommendations-Parkinsons-Disease.png) |
 
 ## Tech Stack
 
