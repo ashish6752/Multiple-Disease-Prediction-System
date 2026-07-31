@@ -50,7 +50,7 @@ This project provides a single, unified interface for predicting three different
 
 | Negative Diagnosis | Positive Diagnosis |
 |---|---|
-| ![Parkinsons Negative](outputs/Parkinsons-Disease-Prediction-Negative_Diagnosis.png) | ![Parkinsons Positive](outputs/Parkinsons-Disease-Prediction-Positive_Diagnosis.png) |
+| ![Parkinsons Negative](outputs/Parkinsons-Disease-Prediction-Negative-Diagnosis.png) | ![Parkinsons Positive](outputs/Parkinsons-Disease-Prediction-Positive-Diagnosis.png) |
 
 ### Personalized Medical Recommendations
 
