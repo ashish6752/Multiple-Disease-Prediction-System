@@ -1,13 +1,19 @@
-# Multiple-Disease-Prediction-System-using-Machine-Learning
+# Multiple Disease Prediction System using Machine Learning
 
-![Home Page]
+A Streamlit web application that predicts the likelihood of **diabetes**, **heart disease**, and **Parkinson's disease** using trained machine learning models, based on user-entered medical data.
 
-Multiple Disease Prediction System using Machine Learning: This project provides a streamlit web application for predicting multiple diseases, including diabetes, Parkinson's disease, and heart disease, using machine learning algorithms. The prediction models are deployed using Streamlit, a Python library for building interactive web applications.
+![Home Dashboard](outputs/Home_Dashboard.png)
+
+**🔗 Live Demo:** _[add your Streamlit Cloud link here once deployed]_
 
 ## Table of Contents
 
 - [Introduction](#introduction)
 - [Features](#features)
+- [Screenshots](#screenshots)
+- [Tech Stack](#tech-stack)
+- [Models & Datasets](#models--datasets)
+- [Project Structure](#project-structure)
 - [Setup](#setup)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -15,64 +21,147 @@ Multiple Disease Prediction System using Machine Learning: This project provides
 
 ## Introduction
 
-The Multiple Disease Prediction project aims to create a user-friendly web application that allows users to input relevant medical information and receive predictions for different diseases. The machine learning models trained on disease-specific datasets enable accurate predictions for diabetes, Parkinson's disease, and heart disease.
+This project provides a single, unified interface for predicting three different diseases using disease-specific machine learning models. Users input relevant medical measurements and receive an instant prediction, along with personalized diet and lifestyle recommendations, without needing any machine learning background themselves.
 
 ## Features
 
-The Multiple Disease Prediction web application offers the following features:
+- **Multi-Disease Support** — one app, three prediction models (diabetes, heart disease, Parkinson's).
+- **User Input Forms** — simple form-based input for each disease's relevant medical parameters.
+- **Instant Predictions** — models run locally and return results in real time.
+- **Personalized Recommendations** — each result includes tailored doctor-consultation, diet, and exercise guidance.
+- **Sidebar Navigation** — switch between disease predictors using `streamlit-option-menu`.
+- **Lightweight Deployment** — no external API calls or paid services required; runs fully offline once set up.
 
-- **User Input**: Users can input their medical information, including age, gender, blood pressure, cholesterol levels, and other relevant factors.
-- **Disease Prediction**: The application utilizes machine learning models to predict the likelihood of having diabetes, Parkinson's disease, and heart disease based on the inputted medical data.
-- **Prediction Results**: The predicted disease outcomes are displayed to the user, providing an indication of the probability of each disease.
-- **Visualization**: Visualizations are generated to highlight important features and provide insights into the prediction process.
-- **User-Friendly Interface**: The web application offers an intuitive and user-friendly interface, making it easy for individuals without technical knowledge to use the prediction tool.
+## Screenshots
+
+### Diabetes Prediction
+
+| Negative Diagnosis | Positive Diagnosis |
+|---|---|
+| ![Diabetes Negative](outputs/Diabetes_Prediction_-_Negative_Diagnosis.png) | ![Diabetes Positive](outputs/Diabetes_Prediction___Positive_Diagnosis.png) |
+
+### Heart Disease Prediction
+
+| Negative Diagnosis | Positive Diagnosis |
+|---|---|
+| ![Heart Negative](outputs/Heart_Disease_Prediction___Negative_Diagnosis.png) | ![Heart Positive](outputs/Heart_Disease_Prediction___Positive_Diagnosis.png) |
+
+### Parkinson's Disease Prediction
+
+| Negative Diagnosis | Positive Diagnosis |
+|---|---|
+| ![Parkinsons Negative](outputs/Parkinson_s_Disease_Prediction___Negative_Diagnosis.png) | ![Parkinsons Positive](outputs/Parkinson_s_Disease_Prediction___Positive_Diagnosis.png) |
+
+### Personalized Medical Recommendations
+
+| Diabetes | Heart Disease | Parkinson's |
+|---|---|---|
+| ![Diabetes Recommendations](outputs/Personalized_Medical_Recommendations__Diabetes_.png) | ![Heart Recommendations](outputs/Personalized_Medical_Recommendations__Heart_Disease_.png) | ![Parkinsons Recommendations](outputs/Personalized_Medical_Recommendations__Parkinson_s_Disease_.png) |
+
+## Tech Stack
+
+- **Language:** Python
+- **Web Framework:** [Streamlit](https://streamlit.io/)
+- **Navigation:** streamlit-option-menu
+- **ML Library:** scikit-learn
+- **Data Handling:** pandas, numpy
+- **Model Serialization:** pickle (`.sav` files)
+
+## Models & Datasets
+
+| Disease | Algorithm | Dataset | Samples | Features | Train / Test Accuracy |
+|---|---|---|---|---|---|
+| Diabetes | Support Vector Machine (RBF kernel, C=1000) | [Pima Indians Diabetes Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) | 768 | 8 | ~99% / ~70% |
+| Heart Disease | Logistic Regression (C=5000) | [UCI Heart Disease Dataset](https://archive.ics.uci.edu/dataset/45/heart+disease) | 303 | 13 | ~85% / ~71% |
+| Parkinson's Disease | Support Vector Machine (linear kernel) | [UCI Parkinson's Dataset](https://archive.ics.uci.edu/dataset/174/parkinsons) (voice measurements) | 195 | 22 | ~87% / ~87% |
+
+> Accuracy scores are from the project's original training notebooks (90/10 split, `random_state=42` for diabetes/heart; 80/20 split, `random_state=2` for Parkinson's). The gap between train and test accuracy for the diabetes model reflects some overfitting from the high `C=1000` value — a good candidate for future tuning (e.g., cross-validation, lower `C`, or `GridSearchCV`).
+
+> **Preprocessing note (important, and easy to get wrong):** The diabetes and heart disease models were trained on **standardized** features (`StandardScaler`) and each ships with its own fitted scaler (`diabetes_scaler.sav`, `heart_scaler.sav`) that user input must pass through before prediction. The **Parkinson's model was trained on raw, unscaled features** — do not scale its input, or predictions will be wrong. Keep each model paired with its correct (or absent) scaler if you retrain or redeploy.
+
+## Project Structure
+
+```
+Multiple-Disease-Prediction-System/
+├── outputs/
+│   ├── Home_Dashboard.png
+│   ├── Diabetes_Prediction_-_Negative_Diagnosis.png
+│   ├── Diabetes_Prediction___Positive_Diagnosis.png
+│   ├── Heart_Disease_Prediction___Negative_Diagnosis.png
+│   ├── Heart_Disease_Prediction___Positive_Diagnosis.png
+│   ├── Parkinson_s_Disease_Prediction___Negative_Diagnosis.png
+│   ├── Parkinson_s_Disease_Prediction___Positive_Diagnosis.png
+│   ├── Personalized_Medical_Recommendations__Diabetes_.png
+│   ├── Personalized_Medical_Recommendations__Heart_Disease_.png
+│   └── Personalized_Medical_Recommendations__Parkinson_s_Disease_.png
+├── models/
+│   ├── diabetes_model.sav
+│   ├── diabetes_scaler.sav
+│   ├── heart_disease_model.sav
+│   ├── heart_scaler.sav
+│   └── parkinsons_model.sav
+├── datasets/
+│   ├── diabetes.csv
+│   ├── heart.csv
+│   └── parkinsons.csv
+├── app.py
+├── requirements.txt
+└── README.md
+```
 
 ## Setup
 
-To use this project locally, follow these steps:
-
 1. Clone the repository:
-   
+
 ```bash
-git clone (https://github.com/Amit380/Multiple-Disease-Prediction-System-using-Machine-Learning/tree/main)
+git clone https://github.com/Amit380/Multiple-Disease-Prediction-System-using-Machine-Learning.git
+cd Multiple-Disease-Prediction-System-using-Machine-Learning
 ```
 
-2. Install the required dependencies by running:
-   
+2. (Recommended) Create and activate a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+```
+
+3. Install the required dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Download the pre-trained machine learning models for diabetes, Parkinson's disease, and heart disease. Make sure to place them in the appropriate directories within the project structure.
-
-4. Update the necessary configurations and file paths in the project files.
+4. The pre-trained models are already included in the `models/` directory — no separate download needed. Note that the diabetes and heart disease models each require their matching scaler (`diabetes_scaler.sav`, `heart_scaler.sav`) to produce correct predictions; the Parkinson's model does not use a scaler.
 
 ## Usage
 
-To run the Multiple Disease Prediction web application, follow these steps:
+1. Open a terminal and navigate to the project directory.
 
-1. Open a terminal or command prompt and navigate to the project directory.
-
-2. Run the following command to start the Streamlit application:
+2. Run the Streamlit app:
 
 ```bash
-streamlit run multiplediseaseprediction.py
+streamlit run app.py
 ```
 
-3. Access the web application by opening the provided URL in your web browser.
+3. Open the local URL shown in the terminal (typically `http://localhost:8501`) in your browser.
 
-4. Input the relevant medical information as requested by the application.
+4. Select a disease from the sidebar menu.
 
-5. Click the "Predict" button to generate predictions for diabetes, Parkinson's disease, and heart disease based on the provided data.
+5. Enter the requested medical parameters.
 
-6. View the prediction results and any accompanying visualizations or insights.
-
-Feel free to customize the web application's appearance, add more disease prediction models, or integrate additional features based on your specific requirements.
+6. Click the test result button to view the prediction and personalized recommendations.
 
 ## Contributing
 
-Contributions to this project are welcome. If you find any issues or have suggestions for improvement, please open an issue or submit a pull request on the project's GitHub repository.
+Contributions are welcome! To contribute:
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes
+4. Open a pull request describing what you changed and why
+
+Feel free to open an issue for bugs, feature requests, or questions.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE). You are free to modify and use the code for both personal and commercial purposes.
+This project is licensed under the [MIT License](LICENSE). You are free to use and modify the code for personal and commercial purposes.

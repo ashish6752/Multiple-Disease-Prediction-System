@@ -5,9 +5,19 @@ from streamlit_option_menu import option_menu
 
 
 # ================== Load Models ==================
-diabetes_model = pickle.load(open('diabetes_model.sav', 'rb'))
-heart_disease_model = pickle.load(open('heart_disease_model.sav', 'rb'))
-parkinsons_model = pickle.load(open('parkinsons_model.sav', 'rb'))
+diabetes_model = pickle.load(open('models/diabetes_model.sav', 'rb'))
+heart_disease_model = pickle.load(open('models/heart_disease_model.sav', 'rb'))
+parkinsons_model = pickle.load(open('models/parkinsons_model.sav', 'rb'))
+
+# ================== Load Scalers ==================
+# The diabetes and heart disease models were trained on standardized
+# (scaled) features, so raw user input must go through the SAME scaler
+# before prediction, or results will be inaccurate.
+# NOTE: the Parkinson's model was trained on RAW (unscaled) features
+# (confirmed from the original training notebook), so no scaler is
+# used for it here - scaling it would break its predictions.
+diabetes_scaler = pickle.load(open('models/diabetes_scaler.sav', 'rb'))
+heart_scaler = pickle.load(open('models/heart_scaler.sav', 'rb'))
 
 
 # ================== Helper: safe numeric conversion ==================
@@ -103,7 +113,8 @@ if selected == 'Diabetes Prediction':
         if errors:
             st.error("Please fix the following before predicting:\n\n" + "\n".join(f"- {e}" for e in errors))
         else:
-            diab_prediction = diabetes_model.predict(np.array([values]))
+            scaled_values = diabetes_scaler.transform(np.array([values]))
+            diab_prediction = diabetes_model.predict(scaled_values)
 
             if diab_prediction[0] == 1:
                 st.warning("⚠️ The person is diabetic")
@@ -179,7 +190,8 @@ if selected == 'Heart Disease Prediction':
         if errors:
             st.error("Please fix the following before predicting:\n\n" + "\n".join(f"- {e}" for e in errors))
         else:
-            heart_prediction = heart_disease_model.predict(np.array([values]))
+            scaled_values = heart_scaler.transform(np.array([values]))
+            heart_prediction = heart_disease_model.predict(scaled_values)
 
             if heart_prediction[0] == 1:
                 st.warning("⚠️ The person has heart disease")
