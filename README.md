@@ -4,7 +4,7 @@ A Streamlit web application that predicts the likelihood of **diabetes**, **hear
 
 ![Home Dashboard](outputs/Home-Dashboard.png)
 
-**🔗 Live Demo:** _[add your Streamlit Cloud link here once deployed]_
+**🔗 Live Demo:**https://multiple-disease-prediction-system-yhysnzhpdyjjfcehezqxnk.streamlit.app/
 
 ## Table of Contents
 
